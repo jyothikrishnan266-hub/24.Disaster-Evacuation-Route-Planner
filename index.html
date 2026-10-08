@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Disaster Evacuation Route Planner
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo">
+        🚨 SafeRoute
+    </div>
+
+    <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#map">Evacuation Map</a>
+        <a href="#emergencies">Emergencies</a>
+        <a href="#routes">Routes</a>
+        <a href="#priority">Priority</a>
+    </nav>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="badge">
+            Emergency Route Planning System
+        </span>
+
+        <h1>
+            Find the
+            <span>Safest Route</span>
+            During an Emergency
+        </h1>
+
+        <p>
+            Identify safe zones, calculate shortest
+            evacuation routes and prioritize emergency
+            locations using graph algorithms.
+        </p>
+
+        <a
+            href="#dashboard"
+            class="hero-btn"
+        >
+            Open Control Center
+        </a>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="radar">
+
+            <div class="radar-ring ring1"></div>
+
+            <div class="radar-ring ring2"></div>
+
+            <div class="radar-ring ring3"></div>
+
+            <div class="radar-dot dot1"></div>
+
+            <div class="radar-dot dot2"></div>
+
+            <div class="radar-dot dot3"></div>
+
+            <div class="radar-center">
+                🚨
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section
+    id="dashboard"
+    class="section"
+>
+
+    <div class="section-title">
+
+        <h2>
+            Emergency Dashboard
+        </h2>
+
+        <p>
+            Real-time evacuation overview
+        </p>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat-card red">
+
+            <div class="stat-icon">
+                🚨
+            </div>
+
+            <div>
+
+                <h3 id="emergencyCount">
+                    0
+                </h3>
+
+                <p>
+                    Emergency Locations
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card green">
+
+            <div class="stat-icon">
+                🛡️
+            </div>
+
+            <div>
+
+                <h3 id="safeZoneCount">
+                    0
+                </h3>
+
+                <p>
+                    Safe Zones
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card blue">
+
+            <div class="stat-icon">
+                🛣️
+            </div>
+
+            <div>
+
+                <h3 id="routeCount">
+                    0
+                </h3>
+
+                <p>
+                    Routes Calculated
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card orange">
+
+            <div class="stat-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <h3 id="highPriorityCount">
+                    0
+                </h3>
+
+                <p>
+                    High Priority
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MAP ================= -->
+
+<section
+    id="map"
+    class="section"
+>
+
+    <div class="section-title">
+
+        <h2>
+            Evacuation Network
+        </h2>
+
+        <p>
+            Graph representation of roads,
+            emergency locations and safe zones
+        </p>
+
+    </div>
+
+
+    <div class="map-container">
+
+        <div
+            id="networkMap"
+            class="network-map"
+        >
+
+            <!-- SVG GRAPH -->
+
+            <svg
+                viewBox="0 0 1000 560"
+                preserveAspectRatio="xMidYMid meet"
+            >
+
+                <!-- ROADS -->
+
+                <line
+                    class="road"
+                    x1="100"
+                    y1="100"
+                    x2="300"
+                    y2="100"
+                />
+
+                <line
+                    class="road"
+                    x1="300"
+                    y1="100"
+                    x2="500"
+                    y2="180"
+                />
+
+                <line
+                    class="road"
+                    x1="500"
+                    y1="180"
+                    x2="720"
+                    y2="120"
+                />
+
+                <line
+                    class="road"
+                    x1="300"
+                    y1="100"
+                    x2="350"
+                    y2="300"
+                />
+
+                <line
+                    class="road"
+                    x1="350"
+                    y1="300"
+                    x2="550"
+                    y2="350"
+                />
+
+                <line
+                    class="road"
+                    x1="550"
+                    y1="350"
+                    x2="720"
+                    y2="120"
+                />
+
+                <line
+                    class="road"
+                    x1="350"
+                    y1="300"
+                    x2="180"
+                    y2="430"
+                />
+
+                <line
+                    class="road"
+                    x1="180"
+                    y1="430"
+                    x2="550"
+                    y2="350"
+                />
+
+                <line
+                    class="road"
+                    x1="550"
+                    y1="350"
+                    x2="820"
+                    y2="450"
+                />
+
+                <line
+                    class="road"
+                    x1="720"
+                    y1="120"
+                    x2="820"
+                    y2="450"
+                />
+
+                <line
+                    class="road"
+                    x1="500"
+                    y1="180"
+                    x2="550"
+                    y2="350"
+                />
+
+
+                <!-- ROUTE HIGHLIGHT -->
+
+                <polyline
+                    id="routeLine"
+                    class="route-line"
+                    points=""
+                />
+
+            </svg>
+
+
+            <!-- NODES -->
+
+            <div
+                class="map-node emergency"
+                id="node-A"
+                style="left:10%;top:18%;"
+            >
+                <span>A</span>
+                <small>
+                    Emergency
+                </small>
+            </div>
+
+
+            <div
+                class="map-node normal"
+                id="node-B"
+                style="left:30%;top:18%;"
+            >
+                <span>B</span>
+                <small>
+                    Junction
+                </small>
+            </div>
+
+
+            <div
+                class="map-node normal"
+                id="node-C"
+                style="left:50%;top:32%;"
+            >
+                <span>C</span>
+                <small>
+                    Junction
+                </small>
+            </div>
+
+
+            <div
+                class="map-node safe"
+                id="node-D"
+                style="left:72%;top:21%;"
+            >
+                <span>🛡</span>
+                <small>
+                    Safe Zone
+                </small>
+            </div>
+
+
+            <div
+                class="map-node normal"
+                id="node-E"
+                style="left:35%;top:54%;"
+            >
+                <span>E</span>
+                <small>
+                    Junction
+                </small>
+            </div>
+
+
+            <div
+                class="map-node normal"
+                id="node-F"
+                style="left:55%;top:63%;"
+            >
+                <span>F</span>
+                <small>
+                    Junction
+                </small>
+            </div>
+
+
+            <div
+                class="map-node emergency"
+                id="node-G"
+                style="left:18%;top:77%;"
+            >
+                <span>G</span>
+                <small>
+                    Emergency
+                </small>
+            </div>
+
+
+            <div
+                class="map-node safe"
+                id="node-H"
+                style="left:82%;top:80%;"
+            >
+                <span>🛡</span>
+                <small>
+                    Safe Zone
+                </small>
+            </div>
+
+
+            <div
+                class="map-node emergency"
+                id="node-I"
+                style="left:72%;top:21%;"
+            >
+            </div>
+
+        </div>
+
+
+        <div class="map-legend">
+
+            <div>
+                <span class="legend emergency-dot"></span>
+                Emergency
+            </div>
+
+            <div>
+                <span class="legend safe-dot"></span>
+                Safe Zone
+            </div>
+
+            <div>
+                <span class="legend normal-dot"></span>
+                Junction
+            </div>
+
+            <div>
+                <span class="legend route-dot"></span>
+                Shortest Route
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ROUTE CALCULATOR ================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <h2>
+            Shortest Evacuation Route
+        </h2>
+
+        <p>
+            Dijkstra's algorithm finds the
+            lowest-distance safe route
+        </p>
+
+    </div>
+
+
+    <div class="calculator">
+
+        <div class="form-group">
+
+            <label>
+                Emergency Location
+            </label>
+
+            <select id="startNode">
+
+                <option value="A">
+                    A - North Emergency
+                </option>
+
+                <option value="G">
+                    G - South Emergency
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Destination Safe Zone
+            </label>
+
+            <select id="endNode">
+
+                <option value="D">
+                    D - Central Safe Zone
+                </option>
+
+                <option value="H">
+                    H - South Safe Zone
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="calculateRoute()"
+        >
+            🛣 Calculate Shortest Route
+        </button>
+
+
+        <div
+            id="routeResult"
+            class="route-result"
+        >
+            Select locations and calculate
+            an evacuation route.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= EMERGENCIES ================= -->
+
+<section
+    id="emergencies"
+    class="section"
+>
+
+    <div class="section-title">
+
+        <h2>
+            Emergency Locations
+        </h2>
+
+        <p>
+            Current incidents requiring evacuation
+        </p>
+
+    </div>
+
+
+    <div
+        id="emergencyList"
+        class="emergency-grid"
+    ></div>
+
+</section>
+
+
+<!-- ================= SAFE ZONES ================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <h2>
+            Safe Zones
+        </h2>
+
+        <p>
+            Available evacuation destinations
+        </p>
+
+    </div>
+
+
+    <div
+        id="safeZoneList"
+        class="safe-zone-grid"
+    ></div>
+
+</section>
+
+
+<!-- ================= PRIORITY ================= -->
+
+<section
+    id="priority"
+    class="section"
+>
+
+    <div class="section-title">
+
+        <h2>
+            Priority-Based Evacuation
+        </h2>
+
+        <p>
+            Emergency queue based on severity
+        </p>
+
+    </div>
+
+
+    <div class="priority-info">
+
+        <div class="priority-rule">
+
+            <span class="priority-number">
+                1
+            </span>
+
+            <div>
+
+                <h3>
+                    Critical
+                </h3>
+
+                <p>
+                    Immediate evacuation
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority-rule">
+
+            <span class="priority-number">
+                2
+            </span>
+
+            <div>
+
+                <h3>
+                    High
+                </h3>
+
+                <p>
+                    Evacuate immediately after critical locations
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority-rule">
+
+            <span class="priority-number">
+                3
+            </span>
+
+            <div>
+
+                <h3>
+                    Medium
+                </h3>
+
+                <p>
+                    Normal evacuation priority
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="priority-rule">
+
+            <span class="priority-number">
+                4
+            </span>
+
+            <div>
+
+                <h3>
+                    Low
+                </h3>
+
+                <p>
+                    Evacuate after higher priorities
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="priorityQueue"
+        class="priority-list"
+    ></div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h3>
+        🚨 SafeRoute
+    </h3>
+
+    <p>
+        Disaster Evacuation Route Planner
+    </p>
+
+    <p>
+        Graph Algorithms • Dijkstra • Priority Queue
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
